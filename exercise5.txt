@@ -1,0 +1,10 @@
+import { render, screen } from "@testing-library/react";
+import ItemList from "./ItemList";
+
+test("renders the correct number of items", () => {
+    const items = ["Item 1", "Item 2", "Item 3"];
+    render(<ItemList items={items} />);
+
+    const renderedItems = screen.getAllByRole("listitem");
+    expect(renderedItems.length).toBe(items.length);
+});

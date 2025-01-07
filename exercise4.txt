@@ -1,0 +1,17 @@
+import requests
+
+API_URL = "https://api.oxygenx.africa/services/users/v1/login"
+
+def test_login(username, password):
+    response = requests.post(API_URL, data={"username": username, "password": password})
+    return response
+
+# Valid credentials
+valid_response = test_login("valid_user", "valid_password")
+assert valid_response.status_code == 200
+assert "token" in valid_response.json()
+
+# Invalid credentials
+invalid_response = test_login("invalid_user", "wrong_password")
+assert invalid_response.status_code == 401
+assert "error" in invalid_response.json()
